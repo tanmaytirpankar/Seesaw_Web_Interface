@@ -42,7 +42,7 @@ export default () => {
             <div className="grouped fields">
                 Enable additional options below:
                 <div className="ui grid">
-                    <div className="two wide column">
+                    <div className="three wide column">
                         <div className="field">
                             <div className="ui toggle checkbox">
                                 <input
