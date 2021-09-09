@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import Menu from './components/Menu';
-import Options from './components/Options';
 import Learn from './components/Learn';
 import Try from './components/Try';
 import './App.css'
+import About from "./components/About";
 
 const options = [
     {
@@ -20,15 +20,17 @@ const options = [
 function rendering( selected ) {
     switch (selected.value) {
         case 'About':
-            return <div>About</div>;
+            return <About />
         case 'Try':
             return <Try />;
         case 'Learn':
-            return <div>Learn</div>;
+            return <Learn />
+        default:
+            return <div>No view selected to render</div>
     }
 };
 
-export default () => {
+const App = () => {
     const [selected, setSelected] = useState(options[1])
 
     return (
@@ -46,3 +48,5 @@ export default () => {
         </div>
     )
 };
+
+export default App;

@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React from 'react';
 
-export default ({ selected, onSelectedChange, options }) => {
+const Menu = ({ selected, onSelectedChange, options }) => {
     var converter = require('number-to-words');
 
     const renderedMenu = options.map((option) => {
@@ -23,11 +23,8 @@ export default ({ selected, onSelectedChange, options }) => {
     return (
         <div className={`ui ${converter.toWords(options.length)} item menu`}>
             {renderedMenu}
-            {/*<a*/}
-            {/*    className={`${selected==='About'? 'active' : ''} item`}*/}
-            {/*>About</a>*/}
-            {/*<a className={`${selected==='Try'? 'active' : ''} item`}>Try</a>*/}
-            {/*<a className={`${selected==='Learn'? 'active' : ''} item`}>Learn</a>*/}
         </div>
     );
 };
+
+export default Menu;

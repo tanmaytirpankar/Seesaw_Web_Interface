@@ -27,7 +27,7 @@ function renderAbstractionBounds(abstractionActive) {
     }
 }
 
-export default () => {
+const Options = () => {
     const [abstractionActive, setAbstractionActive] = useState(false);
 
 
@@ -66,11 +66,18 @@ export default () => {
                 <div className="field">
                     <div className="ui toggle checkbox">
                         <input type="checkbox" tabIndex="2"/>
-                        <label>Analysis</label>
+                        <label>Report Instability</label>
                     </div>
                 </div>
-
+                <div className="field">
+                    <div className="ui toggle checkbox">
+                        <input type="checkbox" tabIndex="3"/>
+                        <label>Enable Constraints</label>
+                    </div>
+                </div>
             </div>
         </div>
     );
 }
+
+export default Options;

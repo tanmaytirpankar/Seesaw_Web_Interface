@@ -1,22 +1,42 @@
 import React, {useState} from 'react';
+import axios from 'axios';
 import './Try.css'
 import Options from './Options';
 import { examples } from '../benchmarks/examples'
+const API_URL = 'http://127.0.0.1:5000'
 
-function onNextClicked(e, setCurrentIndex, currentIndex) {
+const seesaw_api = axios.create({
+    baseURL: API_URL,
+})
+
+function onNextClicked(e, setCurrentIndex, currentIndex, setInput) {
     setCurrentIndex(Math.min(examples.length-1, currentIndex+1));
-    e.target.value(examples[currentIndex].ex);
+    // console.log(currentIndex)
+    setInput(examples[currentIndex].ex)
+    // console.log("Clicked on Next")
 }
 
-function onPrevClicked(e, setCurrentIndex, currentIndex) {
+function onPrevClicked(e, setCurrentIndex, currentIndex, setInput) {
     setCurrentIndex(Math.max(0, currentIndex-1));
-    e.target.value(examples[currentIndex].ex);
+    // console.log(currentIndex)
+    setInput(examples[currentIndex].ex)
+    // console.log("Clicked on Prev")
 }
 
-export default () => {
-    const [input, setInput] = useState("");
+const onStartClicked = async (e, input) => {
+    const response = await seesaw_api.get('/users', {
+        params : { program: input },
+    });
+
+    console.log(response);
+}
+
+const Try = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
-    console.log(currentIndex);
+    const [input, setInput] = useState(examples[currentIndex].ex);
+    const [output, setOutput] = useState("")
+
+    // console.log(currentIndex);
     return (
         <div className="ui form">
             <div className="field">
@@ -52,20 +72,25 @@ export default () => {
                 </div>
                 <div className="ui three column grid">
                     <div className="column">
-                        <button className="ui large button">Start</button>
+                        <button
+                            className="ui large button"
+                            onClick={(e)=>onStartClicked(e, input)}
+                        >
+                            Start
+                        </button>
                     </div>
                     <div className="center aligned column">
                         <div className="ui large buttons">
                             <button
                                 className="ui button"
-                                onClick={(e, setCurrentIndex, currentIndex)=>onPrevClicked()}
+                                onClick={(e)=>onPrevClicked(e, setCurrentIndex, currentIndex, setInput)}
                             >
                                 Prev
                             </button>
                             <div className="or"></div>
                             <button
                                 className="ui button"
-                                onClick={(e, setCurrentIndex, currentIndex)=>onNextClicked()}
+                                onClick={(e)=>onNextClicked(e, setCurrentIndex, currentIndex, setInput)}
                             >
                                 Next
                             </button>
@@ -82,3 +107,5 @@ export default () => {
         </div>
     );
 };
+
+export default Try;
