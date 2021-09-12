@@ -23,9 +23,24 @@ function onPrevClicked(e, setCurrentIndex, currentIndex, setInput) {
     // console.log("Clicked on Prev")
 }
 
-const onStartClicked = async (e, input) => {
+const onStartClicked = async (e,
+                              input,
+                              abstractionActive,
+                              abstractionLowerBound,
+                              abstractionUpperBound,
+                              parallelEnabled,
+                              reportInstability,
+                              enableConstraints) => {
     const response = await seesaw_api.get('/users', {
-        params : { program: input },
+        params : {
+            program: input,
+            abstraction : abstractionActive,
+            abstraction_lower_bound : abstractionLowerBound,
+            abstraction_upper_bound : abstractionUpperBound,
+            parallel : parallelEnabled,
+            report_instability : reportInstability,
+            enable_constraints : enableConstraints,
+        },
     });
 
     console.log(response);
@@ -34,9 +49,15 @@ const onStartClicked = async (e, input) => {
 const Try = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [input, setInput] = useState(examples[currentIndex].ex);
-    const [output, setOutput] = useState("")
+    const [output, setOutput] = useState("");
+    const [abstractionActive, setAbstractionActive] = useState(false);
+    const [abstractionLowerBound, setAbstractionLowerBound] = useState(10);
+    const [abstractionUpperBound, setAbstractionUpperBound] = useState(20);
+    const [parallelEnabled, setParallelEnabled] = useState(false)
+    const [reportInstability, setReportInstability] = useState(false);
+    const [enableConstraints, setEnableConstraints] = useState(false);
 
-    // console.log(currentIndex);
+    // console.log(abstractionActive);
     return (
         <div className="ui form">
             <div className="field">
@@ -66,6 +87,8 @@ const Try = () => {
                         <textarea
                             spellCheck="false"
                             placeholder="Output"
+                            value={output}
+                            onChange={(e) => setOutput(e.target.value)}
                         >
                         </textarea>
                     </div>
@@ -74,7 +97,14 @@ const Try = () => {
                     <div className="column">
                         <button
                             className="ui large button"
-                            onClick={(e)=>onStartClicked(e, input)}
+                            onClick={(e) => onStartClicked(e,
+                                input,
+                                abstractionActive,
+                                abstractionLowerBound,
+                                abstractionUpperBound,
+                                parallelEnabled,
+                                reportInstability,
+                                enableConstraints)}
                         >
                             Start
                         </button>
@@ -102,7 +132,15 @@ const Try = () => {
                 </div>
             </div>
             <div className="field">
-                <Options/>
+                <Options
+                    abstractionActive={abstractionActive}
+                    onAbstractionChange={setAbstractionActive}
+                    onAbstractionLowerBoundChange={setAbstractionLowerBound}
+                    onAbstractionUpperBoundChange={setAbstractionUpperBound}
+                    onParallelEnableChange={setParallelEnabled}
+                    onReportInstabilityChange={setReportInstability}
+                    onEnableConstraintsChange={setEnableConstraints}
+                />
             </div>
         </div>
     );
