@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/Seesaw_Web_Interface/static/css/main.45312b94.chunk.css",
-    "main.js": "/Seesaw_Web_Interface/static/js/main.25021a00.chunk.js",
-    "main.js.map": "/Seesaw_Web_Interface/static/js/main.25021a00.chunk.js.map",
+    "main.js": "/Seesaw_Web_Interface/static/js/main.11799c8f.chunk.js",
+    "main.js.map": "/Seesaw_Web_Interface/static/js/main.11799c8f.chunk.js.map",
     "runtime-main.js": "/Seesaw_Web_Interface/static/js/runtime-main.790ebf19.js",
     "runtime-main.js.map": "/Seesaw_Web_Interface/static/js/runtime-main.790ebf19.js.map",
     "static/js/2.5517130e.chunk.js": "/Seesaw_Web_Interface/static/js/2.5517130e.chunk.js",
@@ -15,6 +15,6 @@
     "static/js/runtime-main.790ebf19.js",
     "static/js/2.5517130e.chunk.js",
     "static/css/main.45312b94.chunk.css",
-    "static/js/main.25021a00.chunk.js"
+    "static/js/main.11799c8f.chunk.js"
   ]
 }
