@@ -3,7 +3,7 @@ import axios from 'axios';
 import './Try.css'
 import Options from './Options';
 import { examples } from '../benchmarks/examples'
-const API_URL = 'http://127.0.0.1:5000'
+const API_URL = 'http://ec2-54-172-154-66.compute-1.amazonaws.com'
 
 const seesaw_api = axios.create({
     baseURL: API_URL,
@@ -31,7 +31,7 @@ const onStartClicked = async (e,
                               parallelEnabled,
                               reportInstability,
                               enableConstraints) => {
-    const response = await seesaw_api.get('/users', {
+    const response = await seesaw_api.get('/seesaw', {
         params : {
             program: input,
             abstraction : abstractionActive,

@@ -95,16 +95,16 @@ const Options = ({ abstractionActive,
                         <label>Report Instability</label>
                     </div>
                 </div>
-                <div className="field">
-                    <div className="ui toggle checkbox">
-                        <input
-                            type="checkbox"
-                            tabIndex="3"
-                            onChange={() => onEnableConstraintsChange(toggle)}
-                        />
-                        <label>Enable Constraints</label>
-                    </div>
-                </div>
+                {/*<div className="field">*/}
+                {/*    <div className="ui toggle checkbox">*/}
+                {/*        <input*/}
+                {/*            type="checkbox"*/}
+                {/*            tabIndex="3"*/}
+                {/*            onChange={() => onEnableConstraintsChange(toggle)}*/}
+                {/*        />*/}
+                {/*        <label>Enable Constraints</label>*/}
+                {/*    </div>*/}
+                {/*</div>*/}
             </div>
         </div>
     );
