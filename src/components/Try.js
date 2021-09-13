@@ -25,6 +25,7 @@ function onPrevClicked(e, setCurrentIndex, currentIndex, setInput) {
 
 const onStartClicked = async (e,
                               input,
+                              setOutput,
                               abstractionActive,
                               abstractionLowerBound,
                               abstractionUpperBound,
@@ -41,9 +42,10 @@ const onStartClicked = async (e,
             report_instability : reportInstability,
             enable_constraints : enableConstraints,
         },
-    });
+    }, { timeout: 120000});
 
-    console.log(response);
+    // console.log(response);
+    setOutput(response.data);
 }
 
 const Try = () => {
@@ -99,6 +101,7 @@ const Try = () => {
                             className="ui large button"
                             onClick={(e) => onStartClicked(e,
                                 input,
+                                setOutput,
                                 abstractionActive,
                                 abstractionLowerBound,
                                 abstractionUpperBound,
