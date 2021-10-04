@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import axios from 'axios';
 import './Try.css'
 import Options from './Options';
+// import Spinner from "./Spinner";
 import { examples } from '../benchmarks/examples'
 const API_URL = 'https://satire.tanmaytirpankar.com'
 
@@ -10,17 +11,19 @@ const seesaw_api = axios.create({
 })
 
 function onNextClicked(e, setCurrentIndex, currentIndex, setInput) {
-    setCurrentIndex(Math.min(examples.length-1, currentIndex+1));
-    // console.log(currentIndex)
-    setInput(examples[currentIndex].ex)
-    // console.log("Clicked on Next")
+    const newIndexValue = Math.min(examples.length-1, currentIndex+1);
+    setCurrentIndex(newIndexValue);
+    console.log(newIndexValue);
+    setInput(examples[newIndexValue].ex);
+    // console.log("Clicked on Next");
 }
 
 function onPrevClicked(e, setCurrentIndex, currentIndex, setInput) {
-    setCurrentIndex(Math.max(0, currentIndex-1));
-    // console.log(currentIndex)
-    setInput(examples[currentIndex].ex)
-    // console.log("Clicked on Prev")
+    const newIndexValue = Math.max(0, currentIndex-1);
+    setCurrentIndex(newIndexValue);
+    // console.log(newIndexValue);
+    setInput(examples[newIndexValue].ex);
+    // console.log("Clicked on Prev");
 }
 
 const onStartClicked = async (e,
@@ -32,6 +35,7 @@ const onStartClicked = async (e,
                               parallelEnabled,
                               reportInstability,
                               enableConstraints) => {
+    // setOutput("");
     const response = await seesaw_api.get('/seesaw', {
         params : {
             program: input,
@@ -44,20 +48,40 @@ const onStartClicked = async (e,
         },
     }, { timeout: 120000});
 
-    // console.log(response);
-    setOutput(response.data);
+    // console.log(response.data.data);
+    setOutput(response.data.data);
+}
+
+function onClearClicked(e, setOutput) {
+    setOutput("")
 }
 
 const Try = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [input, setInput] = useState(examples[currentIndex].ex);
     const [output, setOutput] = useState("");
+    // const [loading, setLoading] = useState(false);
     const [abstractionActive, setAbstractionActive] = useState(false);
     const [abstractionLowerBound, setAbstractionLowerBound] = useState(10);
     const [abstractionUpperBound, setAbstractionUpperBound] = useState(20);
     const [parallelEnabled, setParallelEnabled] = useState(false)
     const [reportInstability, setReportInstability] = useState(false);
     const [enableConstraints, setEnableConstraints] = useState(false);
+
+    // useEffect(async () => {
+    //     try {
+    //         // set loading to true before calling API
+    //         setLoading(true);
+    //         const data = await fetchData();
+    //         setData(data);
+    //         // switch loading to false after fetch is complete
+    //         setLoading(false);
+    //     } catch (error) {
+    //         // add error handling here
+    //         setLoading(false);
+    //         console.log(error);
+    //     }
+    // }, []);
 
     // console.log(abstractionActive);
     return (
@@ -130,7 +154,11 @@ const Try = () => {
                         </div>
                     </div>
                     <div className="column">
-                        <button className="ui large right floated button">Clear</button>
+                        <button className="ui large right floated button"
+                                onClick={(e)=>onClearClicked(e, setOutput)}
+                        >
+                            Clear
+                        </button>
                     </div>
                 </div>
             </div>
