@@ -3,7 +3,7 @@ import axios from 'axios';
 import './Try.css'
 import Options from './Options';
 import { examples } from '../benchmarks/examples'
-const API_URL = 'https://ec2-54-172-154-66.compute-1.amazonaws.com'
+const API_URL = 'https://satire.tanmaytirpankar.com'
 
 const seesaw_api = axios.create({
     baseURL: API_URL,
